@@ -235,6 +235,10 @@ That's the failure mode no note-vs-note check can see.
 
 ## Install It As A Claude Code Skill
 
+> **Status: draft, not published.** This repo is private while the article is
+> being finished, so the clone line below only works for its owner. The
+> instructions are written for the day it goes public.
+
 This repo ships the whole method as a ready-to-use skill — the four prompts above, turned into an instrument Claude applies to your repo:
 
 ```bash
