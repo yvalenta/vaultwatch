@@ -235,10 +235,6 @@ That's the failure mode no note-vs-note check can see.
 
 ## Install It As A Claude Code Skill
 
-> **Status: draft, not published.** This repo is private while the article is
-> being finished, so the clone line below only works for its owner. The
-> instructions are written for the day it goes public.
-
 This repo ships the whole method as a ready-to-use skill — the four prompts above, turned into an instrument Claude applies to your repo:
 
 ```bash
@@ -271,4 +267,4 @@ The difference is who audits.
 
 *Built in public. The 37 lies, the six green rounds, and the wallet incident are documented in the vault's own `history/` — that's the point.*
 
-*This method description is public domain. Steal it, run it, and let your auditors contradict you.*
+*This method description is public domain ([CC0](LICENSE)). Steal it, run it, and let your auditors contradict you.*
