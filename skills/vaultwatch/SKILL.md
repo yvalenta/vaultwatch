@@ -1,5 +1,5 @@
 ---
-name: audited-vault
+name: vaultwatch
 description: >
   Set up and operate an AUDITED knowledge vault: a plain-markdown second brain
   whose claims are verified by two instruments — a no-network coherence audit
@@ -16,7 +16,7 @@ description: >
   contradict them, a plain wiki is enough and this skill is overkill.
 ---
 
-# Audited Vault
+# vaultwatch — the wiki that gets audited against reality
 
 A second brain for **operated systems**. The difference from a normal wiki:
 the vault is not something you read — it is something you **run**. Two scripts

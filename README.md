@@ -233,17 +233,17 @@ Our auditor caught a "spec is not published yet" claim that had been false for a
 
 That's the failure mode no note-vs-note check can see.
 
-## Install It As A Claude Code Skill
+## Install It As A Claude Code Skill — `vaultwatch`
 
 This repo ships the whole method as a ready-to-use skill — the four prompts above, turned into an instrument Claude applies to your repo:
 
 ```bash
-git clone https://github.com/yvalenta/audited-vault
+git clone https://github.com/yvalenta/vaultwatch
 mkdir -p ~/.claude/skills
-cp -r audited-vault/skills/audited-vault ~/.claude/skills/
+cp -r vaultwatch/skills/vaultwatch ~/.claude/skills/
 ```
 
-Then, in any repo: *"set up an audited vault here."* Claude builds the structure, writes both auditors fitted to what your project actually serves, and runs them in front of you.
+Then, in any repo: *"set up vaultwatch here"* (or *"set up an audited vault here"*). Claude builds the structure, writes both auditors fitted to what your project actually serves, and runs them in front of you.
 
 ## The Result
 
