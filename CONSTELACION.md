@@ -8,12 +8,12 @@ solo superficies públicas.
 |---|---|
 | id | audited-vault |
 | clase | conocimiento |
-| qué | el método del vault auditado, empaquetado para afuera: el artículo y una skill instalable de Claude Code |
+| qué | vaultwatch: el método del vault auditado empaquetado para afuera — el artículo y la skill instalable `skills/vaultwatch` (CC BY 4.0) |
 | dónde | GitHub; la skill se copia a `~/.claude/skills/` de quien la instala |
 | servicio | `—` |
 | atiende | sesiones de Claude a demanda |
 | contexto | `README.md` |
-| visibilidad | público: `github:yvalenta/audited-vault` |
+| visibilidad | público: `github:yvalenta/vaultwatch` (la carpeta local sigue siendo `audited-vault`; el nombre viejo redirige) |
 
 ## Aristas
 
