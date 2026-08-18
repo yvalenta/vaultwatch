@@ -267,4 +267,4 @@ The difference is who audits.
 
 *Built in public. The 37 lies, the six green rounds, and the wallet incident are documented in the vault's own `history/` — that's the point.*
 
-*This method description is public domain ([CC0](LICENSE)). Steal it, run it, and let your auditors contradict you.*
+*This method — article and skill — is [CC BY 4.0](LICENSE): take it, run it, adapt it, and let your auditors contradict you. Keep one line of credit pointing back here so the next person can find the source.*
