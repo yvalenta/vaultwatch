@@ -1,5 +1,5 @@
 ---
-estado: en-curso
+estado: hecha
 dueño: ambos
 fecha: 2026-09-20
 tema: veredicto sobre Jev (TypeSafe AI) y el método — el proveedor no entra; del patrón sobrevive un solo chequeo candidato, determinista
@@ -181,28 +181,33 @@ Medido:
 es que el auditor crece por autopsia, no por ambición; historia e instantáneas
 no se anclan. Falta el juicio.
 
-**Lo que falta, para una sesión fría** (`/casa jev-veredicto` desde este repo):
-1. Leer el resultado del workflow `wf_dd6ec0e6-e54` (cinco clasificadores y un
-   escéptico por archivo sobre las 207 líneas: viva sin ancla / viva medida por
-   otra vía / historia / instantánea / ruido). Vive en
-   `~/.claude/projects/-Users-yonatan-Developer-audited-vault/dcaca0ed-3b71-473f-a67d-61e8c81988c2/subagents/workflows/wf_dd6ec0e6-e54/journal.jsonl`.
-   Ojo con el agente que devuelve veredicto y lista vacía: mirar el largo de
-   `lineas` y `veredictos` antes de creerle.
-2. Scripts y resultados del piloto (con valores internos, por eso fuera del
-   repo): `~/.claude/projects/-Users-yonatan-Developer-audited-vault/piloto-forma-sin-lector/`
-   — `barrido.py` (mutación contra un instrumento), `barrido_completo.py`
-   (contra la puerta entera, en paralelo), `anclas_red.rb` + `sin_red.rb` (qué
-   lee el auditor con red, sin red), `gate_completo.json`, `cruce.json`.
-3. Decidir con el criterio: si sobreviven «vivas sin ancla» que importen (ya
-   tienen su prueba negativa: están entre las 262 verdes), el chequeo entra a
-   `references/auditor-checks.md` como #9 —«barrido por mutación: lo que tiene
-   forma de dato y deja la puerta verde al romperlo»—, consultivo, con banner, y
-   con la cifra del cruce estático como la falla que lo motivó. Si no sobrevive
-   ninguna, no entra y se escribe por qué. Las líneas concretas van a una tarea
-   `propuesta` en el repo del vault medido, no acá.
-4. Cerrar: `estado: hecha`, bitácora, commit. El push pide GO del momento.
+**El juicio (21-sep, sesión fría).** El workflow de clasificación había
+terminado a medias: tres de los cinco escépticos murieron por un tope de 300
+caracteres en el schema. Se relanzaron solo esos (18 líneas). Resultado sobre
+las 207 líneas: 91 historia, 69 medidas por otra vía, 14 ruido, 7
+instantáneas y **26 vivas sin ancla** (el escéptico bajó 7 de 33). Al cruzar
+las 26 contra la prueba negativa, una estaba entre los 3 rojos: clasificador
+y escéptico, los dos con grep en mano, la dieron por «sin lector» y la
+mutación ya le había hallado uno (una prueba que compara el HTML commiteado
+contra el regenerado — lee la frase, no mide el hecho). Quedan **25 con su
+prueba negativa**, en 6 archivos.
+
+**¿Importan?** 13 son hechos de otro repo de la casa (direcciones locales,
+cadencias, techos de memoria): fuera del alcance por diseño; lo que piden es
+cita, no fila. Las otras 12 son propias y al alcance, y entre ellas hay un
+precio que fijamos nosotros, el techo de gasto por defecto de un script que
+paga en firme, el umbral de una alerta de presupuesto, y el ritmo del vigía
+que es el único lector de otra línea del vault. Eso cumple el criterio: **el
+chequeo entró a `references/auditor-checks.md` como #9**, consultivo, con sus
+límites escritos (rojo tras mutar prueba que alguien lee la frase, no que
+alguien mida el hecho; no ve afirmaciones sin forma; una corrida de puerta
+por dato). Las líneas concretas quedaron como tarea `propuesta` en el repo
+del vault medido. Scripts, clasificación y veredictos, con valores internos,
+siguen fuera de este repo:
+`~/.claude/projects/-Users-yonatan-Developer-audited-vault/piloto-forma-sin-lector/`.
 
 ## Bitácora
+- 2026-09-21 (tarde, sesión fría): relanzados los 3 escépticos caídos (2 agentes en el modelo mediano, ~0,27 M tokens, sin schema: JSON a archivo, validado, con `razon` y `greps` no vacíos comprobados). 18 de 18 con veredicto: 13 siguen, 5 bajan a historia. El cruce de los 26 sobrevivientes contra `gate_completo.json` lo hizo la sesión y tumbó uno; el mecanismo del lector se leyó en el test. Las cifras del #9 se recontaron contra los JSON (91+69+14+7+26 = 207). La entrega (el texto del #9) NO pasó por un refutador aparte: es catálogo, no dinero ni autorización. Sin push: pide GO.
 - 2026-09-21: visto de Yonatan al veredicto. Piloto del chequeo candidato corrido hasta la prueba negativa (548 datos, 11 leídos por el auditor sin red; 262 de 265 sin lector dejan verde la puerta completa). La sesión pasó los 200k de contexto (260k, 26 de 61 turnos sobre el umbral) y cierra acá por la regla de corte, con el workflow de clasificación todavía corriendo: lo que falta quedó escrito arriba.
 - 2026-09-20 (noche, tras el GO): refutación de las filas antes de redactar el issue. Siete agentes de solo lectura, todos en el modelo mediano (replicar/verificar/leer), ~0,9 M tokens, 13 min. Cuatro filas sobrevivieron, una cayó por ya reconocida upstream, y la fila 1 estaba al revés en la primera adenda (el crudo respalda a la prosa, no a las tablas) — se corrigió ANTES del push. Un agente devolvió un resultado vacío con veredicto («placeholder»: se le rompió la salida estructurada); su trabajo se recuperó del transcript y la sesión lo replicó a mano contra los JSON. Todo lo que afirma esta adenda lo corrió la sesión, no solo un agente; el bloque de comandos del borrador se ejecutó tal cual y cada cita de línea se comprobó con `sed`.
 - 2026-09-20 (noche): adenda de Laya. Leídos en crudo README, BENCHMARKS y `laya/router.py` del repo (sin instalar ni correr nada); metadatos por la API de GitHub; las divergencias de cifras, verificadas por grep. Sin agentes.

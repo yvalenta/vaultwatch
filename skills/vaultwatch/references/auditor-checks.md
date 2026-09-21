@@ -75,6 +75,68 @@ against the anchor patterns; cite the assertion site instead of repeating the
 number. If your vault renders in Obsidian, a `[[state/...]]` wikilink is the
 natural citation form.
 
+### 9. Mutation sweep: data-shaped text nobody reads (advisory)
+
+The negative proof (below), run in bulk and before any incident. On a
+throwaway copy of the committed tree (`git archive` into a temp dir — never
+the working repo), take every token in `state/` with a recognizable data
+shape (address, hash, CID, URL, host:port, amount, integer+unit), change one
+character, run the no-network gate, and record whether it stayed green.
+**Green after mutation means no instrument reads that sentence.** It is
+deterministic, it needs no model, and it does not guess who the readers
+are: it measures them.
+
+Why mutation and not a cross-reference: nobody owns the list of what the
+auditors read, and deriving it statically lies in both directions. In the
+pilot, matching literals against the auditor's source reported 141 readers
+that did not exist (dates that also appear in code comments). And two
+model readers in a row — a classifier and a skeptic, each with grep in hand —
+declared a row unread that the mutation had already turned red: a test
+compares it against a generated page.
+
+What one pilot measured (a live private vault, 8 state files): 548
+data-shaped tokens; the no-network auditor reads 11. After discounting what
+the network auditor's patterns cover, 265 tokens on 207 lines had no reader,
+dates excluded; mutated against the full gate (49 checks, 1,340 tests),
+262 left it green. Triage of those 207 lines, by one classifier per file
+plus a skeptic mandated to knock down every "live" verdict: 91 history, 69
+measured some other way (the instrument checks the fact from its own
+literal — the sentence can still drift from it), 14 noise, 7 snapshots, and
+26 live claims nobody watches — 25 with their negative proof, since the
+sweep had already shown a reader for one. Thirteen of the 25 are facts owned
+by another repo (a sibling app's local address, a timer's cadence). **The
+other twelve were ours and within reach**, and they include a price we set
+on our own listing, the default spending ceiling of a script whose payments
+are final, the threshold of a cloud budget alert, and the cadence of the
+very watcher that guards another line of the vault.
+
+Rules of use:
+
+- **Advisory. It never turns the gate red**, and it prints with the
+  humility banner. Its output is a list of candidates, and most of them
+  must NOT be anchored: history is closed, snapshots are printed, not
+  asserted. About one token in twenty survived triage. This check does not
+  repeal "the auditor grows by autopsy" — it shows where the next autopsy
+  would be, and you add rows only for the ones that would hurt.
+- **The triage is judgment, so do it adversarially.** The skeptic moved 7
+  of 33 "live" verdicts down (5 to history, 2 to measured-otherwise), and
+  the sweep itself overruled both on one more.
+- What to do with a survivor: if the fact is yours and in reach, anchor it
+  with the check that fits (#3 for a count, #4 for a constant — read it from
+  the code instead of restating it). If another repo owns the fact, cite it
+  instead of repeating it (#8) and let the owner anchor it. If neither, date
+  it so it reads as a snapshot.
+- Skip dates. In a state file a date is almost always history; 263 of the
+  548 tokens were dates and the no-network auditor read exactly one.
+
+What it does NOT cover: red after mutation proves somebody reads the
+*sentence*, not that anybody measures the *fact* — the one row the sweep
+overruled is read by a copy-consistency test, while the fact itself (a
+timer in another repo) stays unmeasured. It cannot see claims with no data
+shape ("X binds to loopback"). And it costs one full gate run per token:
+265 runs took about ten minutes on six parallel copies — a quarterly
+exercise, not a gate step.
+
 ## Runner discipline
 
 **Discover, don't enumerate.** The runner finds its suites and checks by
