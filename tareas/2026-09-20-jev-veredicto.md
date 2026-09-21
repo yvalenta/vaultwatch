@@ -70,7 +70,8 @@ local y abierto, para un sitio con caudal real de decisiones». Laya
 mueve**, y las razones salen de su propio `BENCHMARKS.md`:
 
 - **Sin afinar no decide.** En typed-decisions los dos checkpoints base dan
-  0,361 y 0,342 — por debajo de la clase mayoritaria (0,461). El 0,766 del
+  0,361 y 0,342 según su tabla (0,362 y 0,3515 en el crudo de T4) — por debajo
+  de la clase mayoritaria (0,461). El 0,766 del
   titular es del checkpoint afinado con el split de entrenamiento de ese mismo
   benchmark, y las etiquetas son de un LLM maestro (el «techo» 0,735 es su
   autoacuerdo): es acuerdo con otro modelo, no con la verdad — «dos números, no
@@ -92,32 +93,61 @@ mueve**, y las razones salen de su propio `BENCHMARKS.md`:
 el banner de humildad mejor que nada visto esta semana: cada cifra con su
 procedencia («third-party published, never measured here», «in training» /
 «held out») y una sección «Limits, stated plainly». Y a la vez, con dos días de
-vida, ya es un caso del chequeo #1 (la cifra afirmada en dos sitios), verificado
-por grep sobre el commit del 20-sep:
+vida, ya es un caso de los chequeos #1 y #3 (la cifra afirmada en dos sitios; el
+doc contra el disco). Las filas de abajo pasaron por refutación con repro sobre
+el commit `42626c3` y después las replicó la sesión contra los JSON crudos —
+la primera versión de esta adenda tenía la fila 1 al revés:
 
-- multilingüe base: 0,342 (tablas, README L308 y L323) contra 0,352 y «0,35»
-  (prosa, README L360 y L393); inglés base 0,361 (BENCHMARKS L143) contra 0,362
-  (README L307); Brier 0,061 contra 0,062; «6–7x faster» (README L269) contra
-  «7,8× faster» (L284).
-- README L273 dice que toda cifra de Laya es lo que devuelve
-  `Router().predict(...)`, «not a hand-picked best of three»; `laya/router.py`
-  L26–27 dice que `typed-decisions` jamás se elige solo salvo opt-in. Un
-  `Router()` por defecto sobre esas preguntas devuelve el checkpoint de 0,362,
-  no el de 0,766. (Leído en el código, no corrido.)
-- El titular empareja el acierto de un checkpoint (0,766, el afinado, ECE 0,213)
-  con la calibración de otro (0,081, el inglés base tras ajustar), y compara
-  Laya ajustado contra Jev tal como sale. README L296 los funde en una frase.
-- README L192–206 recomienda automatizar sin humano con confianza ≥ 0,85; L138
-  del mismo archivo dice «confidence gating cannot save you».
-- `BENCHMARKS.md` L9 cita `research/results/app_benchmark.json`, que no está en
-  el árbol: la tabla de «Themes» entera no tiene archivo de resultados. README
-  L254 manda a reproducir con `notebooks/laya_benchmark_colab.ipynb`; el archivo
-  vive en `research/scripts/`.
+1. **La fila del titular no está en los resultados commiteados.**
+   `BENCHMARKS.md` L8 dice que el barrido en CPU trae typed-decisions de los
+   tres checkpoints; en `cpu_51_language_sweep.json`, `part_b.by_model` tiene
+   una sola llave, `english` (0,3615 — la fila `laya` de la tabla, al dígito).
+   El JSON de T4 solo trae `laya` (0,362) y `laya-multilingual` (0,3515). El
+   0,766, su Brier y su ECE no están en ningún archivo del repo. El script
+   vuelca el JSON después de cada modelo: tiene cara de archivo parcial
+   commiteado. De ahí cuelgan las divergencias: multilingüe 0,342 en las tablas
+   contra 0,352 y «0,35» en la prosa (el crudo respalda a la **prosa**); 0,361
+   contra 0,362 (dos corridas, sin rotular); Brier 0,061 contra 0,062.
+2. **README L273** dice que toda cifra es lo que devuelve
+   `Router().predict(...)`, «not a hand-picked best of three». Para la fila de
+   typed-decisions no: `auto_task_detection` es `False` por defecto
+   (`router.py` L151, docstring L26–28), `tests/test_router.py` L145 fija que un
+   `Router()` por defecto devuelve `english` sobre esas preguntas, y el arnés
+   que produjo la fila carga cada checkpoint con `laya.load()` sin construir un
+   Router (`bench_local.py` L147–150, L268–271). En la misma tabla, los 32,8 ms
+   son del multilingüe, y el propio README (L92) manda el inglés a `laya`, 39,5
+   ms: por eso «6–7x» (L269) y «7,8×» (L284) conviven. (Leído, no corrido.)
+3. **El titular empareja checkpoints distintos**: 0,766 es del afinado (ECE
+   0,213); 0,081 es la media de `laya` en 49 suites tras el ajuste, y
+   `calibration_repair` no cubre al afinado. El 0,246 de Jev es la suite «S5
+   confidence honesty» de un tercero, tal como sale; en typed-decisions la
+   propia tabla le da 0,144. README L296 los funde. El ajuste en sí es honesto
+   (se ajusta con una mitad y se mide en la otra) — eso no se objeta.
+4. **Punteros a archivos que no están**: `research/results/app_benchmark.json`
+   (`BENCHMARKS.md` L9, toda la tabla de «Themes») no existe en el árbol, ni en
+   la rama `research`, ni en el PR que creó la carpeta, y `bench_apps.py` L39
+   escribiría en otra ruta; README L254 nombra `notebooks/…colab.ipynb`, enlaza
+   a la raíz y el archivo vive en `research/scripts/`; los 193–464 ms y los
+   7,4 s / 10,3 s en CPU no tienen archivo de resultados; de «103–332
+   preguntas/s» el crudo da 55,2–535,6 y el 332 no aparece.
 
-Candidato aparcado (publicar es de Yonatan, y no pasó por refutación): un issue
-upstream con esas cinco filas. Vale por sí mismo para el mantenedor; como canal
-para el método, lo esperable el día 1 es nulo.
+**La fila que cayó como hallazgo nuestro:** la contradicción del apartado de
+confidence gating (README L192–206). Es real —en suites en inglés bien
+ruteadas (las dos de MASSIVE) la confianza media es ≥ 0,99 con 60–78 % de
+acierto—, pero el
+mantenedor ya la había reconocido ese mismo día en su issue #35 («confidence
+gating should not be presented as usable until temperatures are fitted»). Sin
+el barrido de duplicados se la habríamos «descubierto» a quien ya la sabía.
+
+Lo que el barrido encontró coherente también cuenta, para que la ausencia de
+fila signifique algo: la tabla de latencia, 45 de 51 idiomas, las 17.416
+preguntas, 0,466 → 0,081 y la tabla de orden de opciones coinciden con el JSON.
+
+El borrador del issue upstream (filas 1–4, con un bloque de comandos que
+reproduce cada una) quedó escrito y entregado a Yonatan; mandarlo es suyo.
+Como canal para el método, lo esperable el día 1 es nulo.
 
 ## Bitácora
+- 2026-09-20 (noche, tras el GO): refutación de las filas antes de redactar el issue. Siete agentes de solo lectura, todos en el modelo mediano (replicar/verificar/leer), ~0,9 M tokens, 13 min. Cuatro filas sobrevivieron, una cayó por ya reconocida upstream, y la fila 1 estaba al revés en la primera adenda (el crudo respalda a la prosa, no a las tablas) — se corrigió ANTES del push. Un agente devolvió un resultado vacío con veredicto («placeholder»: se le rompió la salida estructurada); su trabajo se recuperó del transcript y la sesión lo replicó a mano contra los JSON. Todo lo que afirma esta adenda lo corrió la sesión, no solo un agente; el bloque de comandos del borrador se ejecutó tal cual y cada cita de línea se comprobó con `sed`.
 - 2026-09-20 (noche): adenda de Laya. Leídos en crudo README, BENCHMARKS y `laya/router.py` del repo (sin instalar ni correr nada); metadatos por la API de GitHub; las divergencias de cifras, verificadas por grep. Sin agentes.
 - 2026-09-20: tres workflows de solo lectura (19 agentes). 10 de 10 citas clave abrieron; 7 confirmadas textual, 3 con matiz (una cifra de calibración atribuida al checkpoint equivocado de un clon; un titular de US$40 M cuyo cuerpo dice US$25,9 M; «lista de espera» está en el blog, no en la portada). Un crítico afirmó «cero coincidencias» en dos greps que dieron 2 y 1: sus hallazgos del piloto quedan como punteros a verificar, no como hechos.
