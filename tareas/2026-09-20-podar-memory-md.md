@@ -1,5 +1,5 @@
 ---
-estado: propuesta
+estado: en-curso
 dueño: ambos
 fecha: 2026-09-20
 tema: MEMORY.md de este repo pesa 13,4 KB (líneas de hasta 597 caracteres) y entra entero al turno 1 de cada sesión; el de nomicheck-ops pesa 1,3 KB
@@ -16,3 +16,12 @@ hace de paso, con la skill consolidate-memory si sigue existiendo.
 
 ## Bitácora
 - 2026-09-20: declarada desde timon (sesión 7843b314). Nada tocado acá.
+- 2026-09-24: **índice podado.** MEMORY.md de 14.842 a 6.700 bytes, 48 de 48
+  memorias indexadas, una línea corta por entrada (la más larga era de 873
+  caracteres). Antes de recortar se comprobó, entrada por entrada, que cada
+  fecha, cifra y ruta del gancho viejo vive en el cuerpo de su archivo (script
+  de tokens con dígito; los 9 marcados eran fechas escritas de otra forma o
+  detalles ya presentes con otra redacción). Copia del índice viejo en el
+  scratchpad de la sesión 854110f8. **Falta la mitad medible del cierre:** el
+  turno 1 de `timon/bin/contexto-vivo --piso 7` en la próxima sesión fría de
+  este repo — esta sesión cargó el índice viejo y no puede medirse a sí misma.
