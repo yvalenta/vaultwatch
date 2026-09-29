@@ -1,5 +1,5 @@
 ---
-estado: propuesta
+estado: en-curso
 dueño: sesión
 fecha: 2026-09-28
 tema: chequeo candidato de ausencia — lo retirado a propósito (credencial rotada, endpoint o archivo dado de baja) queda registrado y la auditoría del mundo afirma que ya no se sirve
@@ -65,3 +65,12 @@ archivo olvidado seguía sirviendo.
   mención (el servido), exit 1; sin el servido → verde, exit 0.
   Falta: redactar la extensión del §4 en `auditor-checks.md`. Commitear es
   local; el push a este repo público aparca para Yonatan.
+- 2026-09-28: **redactado.** `references/auditor-checks.md` §4 suma «Retired
+  values get a register of their own» (registro, marca de pasado con ventana
+  de 3 líneas, tolerancia cero en lo servible, exenciones por sufijo, guarda
+  de publicación, la prueba negativa y el hueco de las URLs retiradas);
+  `SKILL.md` suma media línea al chequeo mínimo 4. Desvío del criterio,
+  escrito para que no se disfrace: el registro vivo vigila **2** valores, no
+  los ≥3 que pedía el piloto (el sitio de aserción etiqueta 3; el hash
+  anterior no está en el registro). Lo que falta: el push al repo público,
+  que aparca para Yonatan, y su visto sobre el desvío.

@@ -102,7 +102,8 @@ Minimum checks — the full catalog with implementation notes is in
 2. Notes not linked from the index (orphans).
 3. Counts written in docs vs counts on disk (tests, files, entries).
 4. Identity constants (addresses, ids, keys) appearing as literals in code
-   instead of being read from their assertion site.
+   instead of being read from their assertion site — and retired ones
+   (a rotated wallet) cited in the present tense, or served at all.
 5. Tables split by a blockquote between rows.
 
 Wire it so it runs **before every session and in CI on every push**. It needs

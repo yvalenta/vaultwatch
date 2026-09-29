@@ -44,6 +44,47 @@ gitignored that could be served. Two forgotten worktree copies once kept a
 compromised credential publicly deployable while every audit passed —
 because the sweep was anchored to a path list instead of the root.
 
+**Retired values get a register of their own.** The shape sweep catches a
+stray literal, but it cannot tell a *retired* value (a rotated wallet, a
+superseded policy hash) from an unknown one, and it asks nothing extra of
+what gets served. After a rotation, declare each old value once, with its
+reason, in a small table inside the no-network auditor (value → "previous
+wallet, key exposed"); the assertion site keeps it under its own label
+(`previous wallet :`), next to the live one. Then:
+
+- **Every mention must read as past.** Sweep the whole tree for each retired
+  value; a line that names it without a past marker (`~~`, "previous",
+  "exposed", "no longer", "new" when contrasting it with the live one…) is
+  citing it in the present tense, and that is red. Look for the marker in a
+  window of three lines, not the single line: prose wraps, and a detector
+  that forces the value and its marker onto one line punishes well-written
+  text and gets switched off by the third false positive.
+- **What is served gets zero tolerance.** In any path with a served segment
+  (`site/`, `.well-known/`, your equivalent) *anywhere* in it, a retired
+  value is red even when marked: a third party reads the JSON, not the
+  comment around it. Match the segment anywhere, not as a prefix — the
+  forgotten copies above ended in the same `.well-known/` filename as the
+  good one; only the root they hung from was different.
+- **Exempt what narrates, not what asserts.** The register itself and the
+  assertion site name retired values by definition; run logs record what a
+  probe saw on the day it ran, and asking a log for a past marker is asking
+  it to lie. Match those exemptions by path *suffix*, so another worktree's
+  copy of the auditor does not report its own register as a present-tense
+  mention.
+- **Guard the publish step too.** The script that deploys a served identity
+  artifact refuses one that carries a retired value. Refuse what is known
+  bad without demanding what is legitimately free to change (a re-pinned
+  CID, say); a guard that blocks a valid re-pin gets disabled.
+
+The negative proof, run once on a `git archive` copy of a live vault: base
+green; the retired value in the present tense in a note and in a served file
+→ red, two mentions; both marked "previous" → red, one mention (the served
+one); served file removed → green.
+
+This register covers *values*. A retired *URL* can be asserted as a 404 row
+in the world audit (below); we have not paid for a register of those, so we
+don't prescribe one.
+
 ### 5. Table hygiene
 
 A blockquote between two table rows splits the table in rendering while
