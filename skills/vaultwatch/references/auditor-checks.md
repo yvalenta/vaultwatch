@@ -45,8 +45,9 @@ compromised credential publicly deployable while every audit passed —
 because the sweep was anchored to a path list instead of the root.
 
 **Retired values get a register of their own.** The shape sweep catches a
-stray literal, but it cannot tell a *retired* value (a rotated wallet, a
-superseded policy hash) from an unknown one, and it asks nothing extra of
+stray literal, but it cannot tell a *retired* value (a rotated wallet whose
+key was exposed, a policy file that declared that wallet) from an unknown
+one, and it asks nothing extra of
 what gets served. After a rotation, declare each old value once, with its
 reason, in a small table inside the no-network auditor (value → "previous
 wallet, key exposed"); the assertion site keeps it under its own label
@@ -80,6 +81,18 @@ The negative proof, run once on a `git archive` copy of a live vault: base
 green; the retired value in the present tense in a note and in a served file
 → red, two mentions; both marked "previous" → red, one mention (the served
 one); served file removed → green.
+
+**Register only what is dangerous to present as current — not everything
+that was superseded.** A rules hash replaced by a newer catalog is not
+retired in this sense: every envelope signed with it stays valid forever,
+and carries it by design. We tried registering one: seven reds, five of them
+unfixable without breaking something correct — a signed demo (marking it
+breaks the signature), a published test vector with its expected canonical
+bytes, fixtures. That is a guard rejecting the valid. The risk it seemed to
+cover was already covered from the other side: the world audit compares the
+served and on-chain hash against the live one, so serving the old one as
+current is red there. The question for the register is "would a third party
+be harmed by reading this as current?", not "is there a newer one?".
 
 This register covers *values*. A retired *URL* can be asserted as a 404 row
 in the world audit (below); we have not paid for a register of those, so we

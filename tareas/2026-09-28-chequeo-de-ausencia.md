@@ -74,3 +74,14 @@ archivo olvidado seguía sirviendo.
   los ≥3 que pedía el piloto (el sitio de aserción etiqueta 3; el hash
   anterior no está en el registro). Lo que falta: el push al repo público,
   que aparca para Yonatan, y su visto sobre el desvío.
+- 2026-09-28: **el criterio de ≥3 estaba mal planteado; decisión de Yonatan:
+  dejar el registro en 2.** Se probó sumar el hash de reglas anterior al
+  registro vivo en un worktree propio (descartado después, el repo vivo no
+  se tocó): 7 rojos, 5 sin arreglo posible sin romper algo correcto — una
+  demo firmada, un vector de prueba publicado con sus bytes canónicos,
+  fixtures. Ese hash no es peligroso, solo quedó reemplazado: todo sobre
+  firmado con él sigue válido, y servirlo como vigente ya es rojo en la
+  auditoría del mundo (compara lo servido y lo on-chain contra el vivo).
+  El §4 público lo dice ahora («Register only what is dangerous to present
+  as current»), y el ejemplo que invitaba al error («a superseded policy
+  hash») se cambió por el caso real. Queda solo el push, que aparca.
