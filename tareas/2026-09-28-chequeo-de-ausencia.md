@@ -38,3 +38,30 @@ archivo olvidado seguía sirviendo.
 - 2026-09-28: declarada tras leer ECC (skills `living-docs-governance`,
   `knowledge-ops`, `verification-loop`); solo la delete-zone sobrevivió como
   idea. Nada tocado en la skill todavía.
+- 2026-09-28: **veredicto: el catálogo público no lo cubre, la práctica viva
+  sí.** No es un chequeo nuevo, es brecha de publicación. Lo que tiene el
+  vault vivo privado y `auditor-checks.md` no:
+  1. un **registro declarado de retirados** (valor → motivo) en el propio
+     auditor sin red, y los valores anteriores con etiqueta propia en el
+     sitio de aserción de identidad (3: wallet, hash, CID);
+  2. barrido del árbol entero que exige que cada mención de un retirado
+     **se marque como pasado** (ventana de 3 líneas, para no castigar prosa
+     envuelta), con los logs de corridas exentos porque afirman en pasado;
+  3. **tolerancia cero en lo servible**: en cualquier ruta con un segmento
+     `site/` o `.well-known/`, un retirado es rojo aunque esté marcado — un
+     tercero lee el JSON, no el comentario;
+  4. la **guarda de publicación** rechaza desplegar un artefacto que traiga
+     un valor retirado.
+  El §4 público solo barre literales por forma fuera del sitio de aserción:
+  atrapa la copia vieja, pero no distingue retirado de desconocido ni exige
+  nada de lo servido. Del lado del mundo no falta nada nuevo: la comparación
+  byte a byte de lo servido contra el valor vivo ya pone rojo si una URL
+  conocida sirve el viejo, y una URL que nadie lista no la cubre ningún
+  registro. Las URLs retiradas (la delete-zone literal de ECC) no tienen
+  autopsia; no entran.
+  **Prueba negativa** sobre una copia `git archive` del vault vivo (no el
+  repo): base verde, exit 0; retirado en presente en una nota y en un
+  `site/` → rojo, 2 menciones, exit 1; ambos marcados «anterior» → rojo, 1
+  mención (el servido), exit 1; sin el servido → verde, exit 0.
+  Falta: redactar la extensión del §4 en `auditor-checks.md`. Commitear es
+  local; el push a este repo público aparca para Yonatan.
