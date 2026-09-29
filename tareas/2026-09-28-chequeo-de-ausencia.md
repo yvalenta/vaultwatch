@@ -1,5 +1,5 @@
 ---
-estado: en-curso
+estado: hecha
 dueño: sesión
 fecha: 2026-09-28
 tema: chequeo candidato de ausencia — lo retirado a propósito (credencial rotada, endpoint o archivo dado de baja) queda registrado y la auditoría del mundo afirma que ya no se sirve
@@ -85,3 +85,7 @@ archivo olvidado seguía sirviendo.
   El §4 público lo dice ahora («Register only what is dangerous to present
   as current»), y el ejemplo que invitaba al error («a superseded policy
   hash») se cambió por el caso real. Queda solo el push, que aparca.
+- 2026-09-28: **publicado con el GO de Yonatan.** `git push origin main`
+  llevó los 4 commits a `yvalenta/vaultwatch` (`cca7970..a43ca58`);
+  `git ls-remote origin main` devuelve `a43ca58`. Antes del push se barrió
+  el diff buscando direcciones, CIDs, el hash y nombres internos: cero.
