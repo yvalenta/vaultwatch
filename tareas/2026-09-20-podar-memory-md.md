@@ -1,5 +1,5 @@
 ---
-estado: en-curso
+estado: hecha
 dueño: ambos
 fecha: 2026-09-20
 tema: MEMORY.md de este repo pesa 13,4 KB (líneas de hasta 597 caracteres) y entra entero al turno 1 de cada sesión; el de nomicheck-ops pesa 1,3 KB
@@ -25,3 +25,4 @@ hace de paso, con la skill consolidate-memory si sigue existiendo.
   scratchpad de la sesión 854110f8. **Falta la mitad medible del cierre:** el
   turno 1 de `timon/bin/contexto-vivo --piso 7` en la próxima sesión fría de
   este repo — esta sesión cargó el índice viejo y no puede medirse a sí misma.
+- 2026-10-03: medida la mitad que faltaba, en sesión fría de este repo (5cc8dce2, claude-desktop 2.1.286). `timon/bin/contexto-vivo --piso 7` desglosa el turno 1 de esta sesión y la fila de instrucciones dice `memory/MEMORY.md 7k` caracteres (7.292 bytes por `wc -c`), contra 14.842 antes del recorte: −7,5k car ≈ −1,9k tokens, en el orden de los ~2,5k prometidos. El turno 1 total (70k) NO sirve para comparar: entre el 20-sep y hoy cambió el arnés (2.1.281 → 2.1.286, esquemas de herramientas 170k car, `Artifact` sola 54k) y ese ruido tapa el recorte; la fila `memory/MEMORY.md` es la medición limpia. 48/48 ganchos siguen (bitácora anterior). Criterio cumplido en su parte medible → hecha.
