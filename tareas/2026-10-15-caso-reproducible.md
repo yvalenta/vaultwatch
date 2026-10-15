@@ -1,5 +1,5 @@
 ---
-estado: abierta
+estado: hecha
 dueño: ambos
 fecha: 2026-10-15
 tema: caso reproducible — un vault de ejemplo ejecutable, con sus dos auditores y mutaciones sobre copia, para ver fallar el método en vivo antes de confiar en él
@@ -67,3 +67,10 @@ la biblioteca estándar de Python 3 y bash.
   tocó. Medido: `./demo.sh --drift` tarda 0,5 s y `--proof` 1,0 s en este
   contenedor, así que «en un minuto» es holgado. Quedan abiertas las
   preguntas 2 (dónde vive) y 3 (CI), y el visto sobre el ejemplo.
+- 2026-10-15: **hecha**, por instrucción de Yonatan. El criterio de cierre pedía
+  su visto sobre el ejemplo y la decisión sobre el README; el enlace ya está
+  puesto y el visto llegó con esta orden. Las preguntas 2 (si el ejemplo vive
+  en `examples/` o dentro de `skills/vaultwatch/`) y 3 (si se prueba en CI) no
+  se resolvieron: se cierra la tarea con ellas abiertas, y quien las retome
+  abre una nueva. Hoy el ejemplo queda en `examples/demo-vault/` y se prueba a
+  mano con `./demo.sh --proof`.
