@@ -65,8 +65,56 @@ Prueba negativa en un vault vivo, sobre copia (`git archive`), no sobre el
 repo: (1) base verde → sello emitido; (2) tocar un archivo de `state/` →
 sello inválido sin volver a correr nada; (3) plantar un rojo → no hay sello
 nuevo y el anterior queda invalidado; (4) tocar solo `history/` → comportamiento
-conforme a lo decidido en la pregunta 2, escrito de antemano.
+conforme a lo decidido en la pregunta 2, escrito de antemano; (5) **deriva del
+mundo con el árbol intacto** (el caso de la billetera): el hash sigue
+coincidiendo y el sello no debe leerse como vigente; simularlo sobre copia sin
+escribir al mundo; (6) **corrida vacía**: 0 suites o 0 filas ASSERTION no
+emiten sello; (7) **auditor aflojado**: cambia el hash del subárbol del
+auditor o baja el conteo de ASSERTION y el emisor se niega y aparca.
 
 ## Bitácora
 - 2026-10-14: declarada. Nada tocado en la skill. Este repo es público: acá
   va solo lo que toca al método; lo interno de la casa vive en su repo.
+- 2026-10-15: **diseño propuesto por lectura; nada medido, nada decidido.**
+  Siete agentes en solo lectura (dos baratos para formato y fuga de datos,
+  cinco de análisis: un candidato cada uno, las preguntas 2 y 3, y un
+  refutador del líder). El formato de las dos tareas nuevas es conforme y no
+  hay fuga nueva. Lo que salió, para decidir en el piloto:
+  1. **Pregunta 1 (dónde vive).** (a) tag de git: sin circularidad, pero atado
+     al sha del commit se huerfana con amend o squash, una ref custom no viaja
+     en un clon por defecto y no cubre lo ignorado. (b) archivo: solo viable
+     comiteado, con una única ruta exenta del hash; sobrevive a `git archive`
+     pero cambia en cada commit y da conflicto al mergear. (c) recomputar: se
+     conserva como procedimiento de verificación, no como sello; las sesiones
+     frías y la guarda de publicación ya corren los auditores. Propuesta: tag
+     append-only cuyo nombre lleva el hash del árbol (no el sha) y cuyo cuerpo
+     es la salida literal del auditor, emitido desde un export limpio
+     (`git archive`) para que lo medido sea lo sellado.
+  2. **Pregunta 2 (qué se ata).** Todo lo que el auditor de coherencia barre,
+     menos el sello: `history/`, `HANDOFF.md` y el índice incluidos. El alcance
+     del hash no puede ser menor que el de lectura del auditor; excluir
+     `history/` dejaría un sello válido sobre un árbol en rojo.
+  3. **Pregunta 3 (la fecha).** Una por instrumento, o «mundo: no medido».
+     Fuera del hash, solo divulgación; el lector muestra la fecha cruda y el
+     tiempo transcurrido. Sin umbral ni etiqueta dentro del sello: «fresco» o
+     «viejo» es el puntaje que el método rechaza. Un umbral, si un consumidor
+     lo exige, es regla de ese consumidor.
+  4. **Lo que el refutador tumbó del líder** (seis de gravedad alta), con su
+     mitigación mínima: lo medido no es lo sellado (el auditor barre ignorados
+     y worktrees, el hash de árbol no) → medir sobre el export; una corrida
+     vacía da exit 0 → el cuerpo lleva los conteos por instrumento y el
+     emisor se niega con 0 o con menos que el sello previo; un rojo posterior
+     no puede borrar un tag ya publicado → el rojo deja un tombstone y gana si
+     es más nuevo (reescribe «un rojo no deja sello» como «deja tombstone»);
+     el consumidor no puede caer al «último commit sellado» → verifica solo
+     `HEAD`; un auditor aflojado dentro del mismo árbol → el cuerpo lleva el
+     hash de su subárbol y el emisor aparca si cambia; verde sobre un segmento
+     leído como verde sobre el sistema → el sello declara que no mide
+     cobertura por frase.
+  5. **Huecos que se escriben, no se cubren:** sin firma, el sello cubre
+     accidente y deriva, no a un adversario; sellar `HANDOFF.md` certifica su
+     identidad, no que su tabla de dirección sea cierta; hace falta confirmar
+     en un vault vivo qué chequeos alcanzan realmente a `history/`.
+  Siguen abiertas las preguntas de si hace falta (pregunta 4) y del piloto. No
+  entra a `references/auditor-checks.md` sin ambas. Pruebas (5) a (7) sumadas
+  a «Cómo se prueba».

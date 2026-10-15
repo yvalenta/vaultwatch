@@ -36,11 +36,16 @@ día que alguna duela. Tampoco cuenta como razón «sería lindo».
 
 ## Reglas que la capa tendría que cumplir (si se construye)
 
-1. **Solo indexa lo sellado.** Reconstruye desde un commit con sello válido.
-   Un vault en rojo no se indexa, o sale marcado «no confiable».
-2. **Cada fragmento viaja con su sello**: proyecto, sha, qué auditor corrió,
-   cuándo, y de qué archivo viene. La respuesta cita el sello y, si es viejo,
-   lo dice antes que el contenido.
+1. **Solo indexa lo sellado, y solo `HEAD`.** Reconstruye desde el `HEAD` de la
+   rama de publicación si tiene sello válido; sin sello, o con un rojo más
+   nuevo, no indexa o marca «no confiable». Nunca cae al «último commit
+   sellado»: un sello por hash de árbol sigue siendo válido para siempre en su
+   commit.
+2. **Cada fragmento viaja con su sello**: proyecto, sha, qué auditor corrió
+   (el instrumento ausente se muestra «no medido»), cuándo, y de qué archivo
+   viene. La respuesta cita el árbol sellado, nunca «fragmento verificado»:
+   el sello no mide cobertura por frase. Muestra la fecha cruda y el tiempo
+   transcurrido, y no decide qué es «viejo».
 3. **Punteros, no copias.** Devuelve fragmento + ruta; el agente abre el
    original. La copia indexada es para encontrar, no para citar (es la regla
    del índice compartido).
@@ -73,3 +78,8 @@ la que decide.
 ## Bitácora
 - 2026-10-14: declarada. Bloqueada por la tarea del sello. Nada medido ni
   construido todavía.
+- 2026-10-15: reglas 1 y 2 corregidas con lo que salió de la refutación del
+  sello (ver su bitácora): verificar solo `HEAD`, sin caer al último commit
+  sellado; citar «árbol sellado» y no «fragmento verificado»; mostrar la fecha
+  sin definir «viejo». Sigue bloqueada y sin medir: la pregunta que va primero
+  se contesta sobre vaults vivos, que no están en este repo público.
