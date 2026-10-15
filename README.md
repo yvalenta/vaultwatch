@@ -283,6 +283,8 @@ cp -r vaultwatch/skills/vaultwatch ~/.claude/skills/
 
 Then, in any repo: *"set up vaultwatch here"* (or *"set up an audited vault here"*). Claude builds the structure, writes both auditors fitted to what your project actually serves, and runs them in front of you.
 
+Want to watch it catch a lie before you trust it? [`examples/demo-vault/`](examples/demo-vault/) is a tiny vault you can run in a minute — Python 3 and bash, no network. `./demo.sh --drift` moves the world without touching a single document: the notes still agree with each other, the coherence audit stays green, and only the world audit goes red.
+
 ## The Result
 
 One brain per project, living next to the code it describes — because only there can an auditor compare it to its own reality.

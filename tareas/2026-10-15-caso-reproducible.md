@@ -36,9 +36,10 @@ la biblioteca estándar de Python 3 y bash.
 
 ## Preguntas abiertas
 
-1. **¿El README del artículo lo enlaza?** No lo toqué: es el texto público del
+1. ~~**¿El README del artículo lo enlaza?** No lo toqué: es el texto público del
    método y enlazar un ejemplo cambia cómo se lee. Si sí, una línea junto a
-   «Install It As A Claude Code Skill».
+   «Install It As A Claude Code Skill».~~ Resuelta el 15-oct: Yonatan pidió
+   enlazarlo; ver la bitácora.
 2. **¿Vive en este repo o aparte?** Hoy cuelga de `examples/`. Si crece, o si
    la skill debe poder copiarlo, habría que decidir si va dentro de
    `skills/vaultwatch/`.
@@ -60,3 +61,9 @@ la biblioteca estándar de Python 3 y bash.
   mismo y dio un rojo que no era el que buscaba; hubo que repetirla con un
   patrón que no puede coincidir. Es el «el auditor vive en el mismo árbol que
   juzga» del catálogo, visto en pequeño. Falta el visto de Yonatan.
+- 2026-10-15: **enlazado en el README del artículo**, a pedido de Yonatan. Un
+  párrafo al final de «Install It As A Claude Code Skill», con el enlace a
+  `examples/demo-vault/` y el caso `--drift`; el resto del artículo no se
+  tocó. Medido: `./demo.sh --drift` tarda 0,5 s y `--proof` 1,0 s en este
+  contenedor, así que «en un minuto» es holgado. Quedan abiertas las
+  preguntas 2 (dónde vive) y 3 (CI), y el visto sobre el ejemplo.
