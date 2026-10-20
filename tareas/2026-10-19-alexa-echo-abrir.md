@@ -149,3 +149,17 @@ TV, Echo), que la constelación no tiene.
   identificadores, compose, configuración, cliente Wyoming y cintas crudas
   en la carpeta de notas compartidas de la sesión hija (`voz-local/`).
   Push aparcado.
+- 2026-10-20 (corrección, misma sesión): HA reinició solo su proceso a los
+  5 min de arrancar: la versión actual migra el bloque `http:` del YAML a
+  su almacén una sola vez y lo trata como config «pendiente»; si nadie la
+  promueve desde la interfaz (usuario autenticado) en 5 minutos, vuelve a
+  la estable y reinicia. Resultado: **el 8123 quedó en todas las
+  interfaces, tailscale incluido**, no «solo en las dos LAN» como dice la
+  entrada anterior; el 80 del bridge sigue solo en la Wi-Fi. Sin OOM ni
+  más reinicios; el bridge y la entidad de prueba sobrevivieron. Intenté
+  dejar el YAML comentado con la explicación y el clasificador de la sesión
+  lo negó (abre HA hacia afuera): queda como decisión de Yonatan, dejarlo
+  así (HA tiene su autenticación) o restringirlo desde la UI una vez
+  dentro, promoviéndolo en la ventana de 5 min. Conviene hacer el
+  asistente inicial pronto: hasta entonces la página de alta es alcanzable
+  desde cualquier aparato de su tailnet.
