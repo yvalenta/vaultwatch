@@ -80,3 +80,39 @@ TV, Echo), que la constelación no tiene.
   Fire TV u otro Echo en la red de cable; (d) la propuesta del cerebro de
   voz local con GO/no-GO; (e) retirar el snoop y, cuando se retire `tv-dns`,
   avisar a la sesión de Jellyfin para tachar su fila en AUTONOMIA.
+- 2026-10-19/20 (sesión fresca, desde el relevo): **informe escrito y
+  snoop retirado.** `FACTIBILIDAD.md` quedó en la carpeta de notas
+  compartidas (`alexa-echo/`, fuera de este repo), con el borrador de la
+  ronda 1 y los dos journals en `out/`. Ronda 1 leída entera (84 hallazgos
+  con veredicto); ronda 2 lanzada y cerrada (`wf_1b1d8947-b3a`: 4 frentes
+  —identificar modelos por huellas, cifras de la skill, control local sin
+  nube, satélite y CPU—, 56 hallazgos, 50 confirmados, 9 agentes sonnet,
+  1,58 M tokens, 31 min); el crítico dejó lo que sigue sin respaldo y no
+  habrá ronda 3. Snoop de 40 rondas resumido: ~13 dominios de Amazon con
+  TTL 60 s se re-resuelven más o menos cada minuto entre los dos Echo, la
+  ruta de voz siempre en caché, OTA y hora cada ~5 min; bytes/día sin
+  dato. Corrección: el barrido SSDP del segundo Echo no es «cada 3 s»
+  continuo sino ráfagas de descubrimiento (SSDP `ssdp:all` +
+  `upnp:rootdevice` por tamaño, más inventario mDNS). Los cachés de los dos
+  routers son independientes (probado en los dos sentidos): en la red de
+  cable hay un aparato Alexa/Fire OS que no responde ping, sin identificar.
+  Yonatan (19:50, vía la sesión madre): «hay un echo studio y un echo»; con
+  la lista de border routers Thread de Amazon (1.1 = solo Echo 4ª gen; 1.3
+  incluye «Echo Studio (1st Gen and newer, 2025 release)») el mapeo más
+  consistente es Echo 4ª gen + Echo Studio 1ª gen (Fire OS); lo cierra la
+  versión de software en la app. **Conclusión: para los dos no hay camino
+  público de apertura** (bootloader bloqueado, exploit de la familia
+  «parcheado hacia 2022» según su autor; ausencia de evidencia, no prueba),
+  como con el Samsung. Lo local hoy: Matter/Thread (el Echo es controlador)
+  y un puente Matter desde Home Assistant (fork vivo); `emulated_hue` queda
+  disputado. Propuesta para GO/no-GO: HA Container + Wyoming (whisper
+  base-int8, piper es_MX, openWakeWord, Speech-to-Phrase) en el homelab
+  (medido: 4 hilos sin GPU, ≈4,4 GB disponibles, puertos 80/8123 libres,
+  sin Bluetooth) con satélite propio (USD 29,90–69, envío a Colombia sin
+  dato) y dos experimentos de 10 min (bridge Hue emulado; puente Matter);
+  skill privada en development (120 KB, ≈8 s, cuenta gratis, 443 + CA
+  pública). Retirados del homelab los scripts y el log del snoop; `tv-dns`
+  sigue arriba (sin GO). Preguntas abiertas y la de GO: §8 del informe.
+  Nota de método: la sesión pasó el umbral de 200k (398k al cierre) por
+  esperar y leer los dos workflows; el detalle largo quedó en la carpeta de
+  notas y no acá. Falta: la decisión de Yonatan.
