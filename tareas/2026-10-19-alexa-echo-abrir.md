@@ -163,3 +163,19 @@ TV, Echo), que la constelación no tiene.
   dentro, promoviéndolo en la ventana de 5 min. Conviene hacer el
   asistente inicial pronto: hasta entonces la página de alta es alcanzable
   desde cualquier aparato de su tailnet.
+- 2026-10-20 (tarde, misma sesión): **experimento A: los dos Echo
+  descubrieron el bridge Hue emulado, sin nube.** Leído del pcap: el Echo
+  Studio y el Echo 4ª gen mandaron M-SEARCH, pidieron la descripción del
+  bridge, crearon usuario y listaron «luz de prueba» (todo 200) en tres
+  momentos de la mañana; **ninguno mandó la orden de encendido** (ningún
+  PUT, la entidad nunca cambió). Falta saber si la app mostró el aparato y
+  si se dio la orden por voz. **Y la premisa cambió: el homelab se mudó a
+  otra casa** (apagado ~11:28, arriba ~11:51 en otra LAN, con IPv6 nativo;
+  Tailscale sigue siendo la puerta). El bridge emulado y el puente Matter
+  solo sirven en la LAN de los Echo, así que el cerebro local de la casa
+  ya no puede ser el homelab: hay que repartir la casa en dos sitios.
+  Lanzado un workflow de análisis (4 lectores + medidor → 3 propuestas
+  → 3 refutadores → síntesis + crítico; modelo por verbo) cuyo plan queda
+  en la carpeta de notas de la sesión (`voz-local/REPARTO-DOS-SITIOS.md`).
+  El stack de voz volvió solo tras el reinicio; la captura y el DNS
+  temporal del TV murieron con el apagado.
