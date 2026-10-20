@@ -116,3 +116,36 @@ TV, Echo), que la constelación no tiene.
   Nota de método: la sesión pasó el umbral de 200k (398k al cierre) por
   esperar y leer los dos workflows; el detalle largo quedó en la carpeta de
   notas y no acá. Falta: la decisión de Yonatan.
+- 2026-10-20 (sesión hija, con el GO de arrancar la tarjeta): **stack de
+  voz local arriba en el homelab y experimento A listo, esperando a
+  Yonatan.** Cuatro contenedores con techo de RAM y datos en una carpeta
+  propia fuera de producción: Home Assistant Container (red de host, 8123
+  solo en las dos LAN), whisper `base-int8` (4 hilos, beam 1), piper
+  `es_MX-ald-medium`, openWakeWord; Speech-to-Phrase declarado pero no
+  levantado (necesita un token de HA que solo existe tras el asistente
+  inicial). Medido con el stack en reposo: HA 315 MiB, whisper 718 MiB
+  (la guía decía ~400), piper 187 MiB, openWakeWord 20 MiB de RAM real
+  (anon del cgroup); la caja pasó de 4,36 a 3,30 GB disponibles. Latencia
+  STT en esta CPU (3 clips en español de 1,8–3,5 s sintetizados con piper,
+  3 rondas): **base-int8 2,2–2,9 s** por comando tras calentar (3,7 s en
+  frío); **small-int8 4,5–6,3 s** en un contenedor temporal ya retirado;
+  la exactitud sobre audio sintético fue pobre en los dos (aciertan una de
+  tres), así que para órdenes queda Speech-to-Phrase como decía el informe
+  y falta repetir con micrófono real. Piper: 0,4–0,5 s por frase tras la
+  primera (9,8 s, carga la voz). Experimento A: `emulated_hue` en el
+  puerto 80 de la Wi-Fi con una sola entidad expuesta («luz de prueba»);
+  autoprueba desde el homelab OK (descripción del bridge, usuario, lista,
+  y el PUT llegó al `input_boolean` en 11 ms, registrado por una
+  automatización en el log); HA ya responde M-SEARCH de otros aparatos de
+  la casa; ningún paquete de los Echo todavía. Captura pasiva corriendo en
+  la Wi-Fi (SSDP + HTTP de los dos Echo, se apaga sola a las 8 h).
+  **Falta de Yonatan**: descubrir el bridge desde la app Alexa (Philips
+  Hue V1 round; si no sale, reiniciar el Studio y apagar el otro Echo
+  durante el descubrimiento), decir «Alexa, enciende la luz de prueba», y
+  hacer el asistente inicial de HA (su usuario) para seguir con
+  Speech-to-Phrase, el TV y Jellyfin. Experimento B no arrancado: pide
+  IPv6 en Docker (reinicia el daemon y con él todos los contenedores) y
+  solo va con GO explícito. Nada tocó los Echo ni el router. Detalle con
+  identificadores, compose, configuración, cliente Wyoming y cintas crudas
+  en la carpeta de notas compartidas de la sesión hija (`voz-local/`).
+  Push aparcado.
