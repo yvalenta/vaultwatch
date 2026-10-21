@@ -179,3 +179,35 @@ TV, Echo), que la constelación no tiene.
   en la carpeta de notas de la sesión (`voz-local/REPARTO-DOS-SITIOS.md`).
   El stack de voz volvió solo tras el reinicio; la captura y el DNS
   temporal del TV murieron con el apagado.
+- 2026-10-20 (noche, misma sesión): **plan de reparto de la casa en dos
+  sitios escrito** (workflow de 13 agentes, 51 min, 0 errores: 4 lectores
+  y un medidor → 3 propuestas independientes, mínima / robusta / escalable
+  → un refutador por propuesta, las tres «sostiene con cambios», 0 fatales
+  → síntesis + crítico de completitud). Vive en la carpeta de notas de la
+  sesión (`voz-local/REPARTO-DOS-SITIOS.md`, con identificadores) junto a
+  los JSON crudos. Lo que dice: casi nada de lo que corre solo se rompió
+  (saliente, loopback o ya por la tailnet); murió lo atado a la LAN vieja
+  (bridge Hue emulado, DNS temporal del TV, la captura, el despertador de
+  la wifi, los alias ssh de la Mac). Reparto: **la caja en casa de la
+  mamá = núcleo** (IRC, Oráculo, túneles, colectores, tablero, Jellyfin
+  por DLNA para los dos TV de allá); **panelita en casa de Yonatan = borde,
+  testigo y pantalla** con los roles que ya tiene, y roles nuevos (cerebro
+  de voz, puente a los Echo, control del TV) solo tras una **compuerta
+  medida** (vuelve sola tras un corte ensayado, RAM/CPU medidas, runtime,
+  testigo afuera avisando): hoy 0 de 4, panelita lleva horas apagada o
+  incomunicada. Molde «sitio» para crecer (nombre, nodo tailscale, rol,
+  manos, power-on ensayado; la red solo en una hoja privada por sitio;
+  nada pineado a IP de LAN) con runbook de alta de 10 pasos. Dos
+  urgencias que no son la mudanza: la copia nocturna de los datos de
+  producción falló cuatro de los últimos seis días (la Mac en batería), y
+  la caja estrenó IPv6 público con ssh, los dos IRC y HA escuchando en
+  todas las interfaces, sin verificar desde afuera (cierre = ufw + rebind,
+  ambos con GO). El crítico dejó 15 huecos (servicios de la Mac sin
+  destino, pines muertos que faltan, el molde no cubre un sitio con dos
+  LAN sin ruta entre sí, colisión de horarios de respaldo a las 05:30,
+  tareas de timon con premisa vieja sin marcar): quedan al pie del plan.
+  21 primeros pasos ordenados; el primero es de Yonatan (prender panelita
+  o confirmar que cayó su proveedor). Siguiente: sesiones por repo (timon:
+  hojas de sitio + pines + runbooks; timon: receta de rebind IRC +
+  respaldos cruzados; medición de solo lectura previa) propuestas como
+  tarjetas; nada se ejecuta sin leer el plan.
