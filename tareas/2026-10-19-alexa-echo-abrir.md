@@ -211,3 +211,15 @@ TV, Echo), que la constelación no tiene.
   hojas de sitio + pines + runbooks; timon: receta de rebind IRC +
   respaldos cruzados; medición de solo lectura previa) propuestas como
   tarjetas; nada se ejecuta sin leer el plan.
+- 2026-10-20 (noche): **GO de Yonatan: «merge todo push despliega» — hecho.**
+  El trabajo de hojas de sitio y pines salió en el repo del plano de
+  control: rama mergeada a main (suite idéntica antes y después salvo las
+  pruebas de pines, de 11 a 34 en verde; los errores de otras tres pruebas
+  ya estaban en main), empujada a su espejo privado y al bare de la caja, y
+  los dos clones de la caja adelantados por fast-forward (no hay units de
+  ese repo que reiniciar). La misma sesión de sitios mergeó encima, con
+  Yonatan, que las reservas DHCP no son posibles: los dos pines a IP de LAN
+  que quedan son frágiles por diseño. Esta bitácora empujada al repo
+  público. Las otras dos tarjetas (receta de rebind de los IRC + respaldos
+  cruzados; AUTONOMIA y aviso de panelita ausente) y la medición de solo
+  lectura siguen sin arrancar. **Pausa por cupo de tokens.**
